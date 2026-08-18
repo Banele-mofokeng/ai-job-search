@@ -1,10 +1,10 @@
-# Job Application Assistant for [YOUR_NAME]
+# Job Application Assistant for Banele Mofokeng
 
-<!-- SETUP: This file is populated by running /setup -->
-<!-- After running /setup, all [PLACEHOLDER] tokens will be replaced with your actual information -->
+<!-- Populated by /setup on 2026-08-18 from documents/cv/Banele_Mofokeng_CV.docx.
+Market: South Africa. Re-run /setup --section <name> to update a section. -->
 
 ## Role
-This repo is a job application workspace. Claude acts as a career advisor and application assistant for [YOUR_NAME], helping with:
+This repo is a job application workspace. Claude acts as a career advisor and application assistant for Banele Mofokeng, helping with:
 1. **Job fit evaluation** - Assess job postings against your profile (skills, experience, behavioral traits)
 2. **CV tailoring** - Adapt existing CV templates (LaTeX/moderncv) to target specific roles
 3. **Cover letter writing** - Draft targeted cover letters using existing templates (LaTeX)
@@ -16,76 +16,80 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 <!-- This section is auto-populated by /setup. You can also fill it in manually. -->
 
 ### Identity
-- **Name:** [YOUR_NAME]
-- **Location:** [YOUR_CITY], [YOUR_COUNTRY] ([YOUR_COMMUTE_CONSTRAINTS])
+- **Name:** Banele Mofokeng
+- **Location:** Sandton, Johannesburg, South Africa (Greater Johannesburg including the Ekurhuleni metro - Sandton, Midrand, Rosebank, Bryanston, Pretoria at the edge, Alberton/Germiston/Boksburg - or remote; Cape Town/Durban count as relocation. Confirmed 2026-08-18 as willing to commute daily to Alberton for full-time on-site work)
+- **Contact:** 081 313 0871 | mofokengbanele9@gmail.com | linkedin.com/in/banele-mofokeng | github.com/Banele-mofokeng
 - **Languages:**
   | Language | Level |
   |----------|-------|
-  | [LANGUAGE] | [LEVEL] |
-  <!-- Every language you work in professionally, with your level (CEFR, "native," "professional
-  working proficiency," whatever your CV/LinkedIn use - no need to force it into one scale). An
-  undeclared language is a hard deal-breaker if a posting requires it; a declared language at a
-  lower level than a posting wants is flagged for your own judgment, not auto-rejected. See
-  04-job-evaluation.md's Language Gate. -->
-- **CV language:** [YOUR_CV_LANGUAGE] <!-- English unless your market expects otherwise; /setup asks -->
+  | English | Native / fluent |
+  <!-- Only English is declared. Per 04-job-evaluation.md's Language Gate, a posting that requires
+  any other language as a job condition is a hard exclusion. Add a row here if that changes. -->
+- **CV language:** English
 
-- **Status:** [YOUR_EMPLOYMENT_STATUS]
-- **LinkedIn headline:** "[YOUR_LINKEDIN_HEADLINE]"
+- **Status:** Employed - Junior Software Developer at Nucleus Supply Chain since February 2025. 30-day notice period. Open to a move for a genuine step up in scope or compensation, not urgently searching.
+- **Work authorisation:** South African citizen. No permit or sponsorship required.
+- **LinkedIn headline:** "Software Developer | .NET, C#, React"
 
 ### Education
-<!-- List your degrees, most recent first -->
-- **[DEGREE_LEVEL] in [FIELD]** ([YEAR_START]-[YEAR_END]) - [INSTITUTION]
-  - Thesis: "[THESIS_TITLE]"
-  - Topics: [KEY_TOPICS]
+- **BSc Mathematics and Computer Science (in progress)** (2018-2024) - North-West University, South Africa
+  - Coursework completed across software development, data structures and algorithms, database systems and mathematics
+  - **16 credits outstanding toward completion.** State this plainly in every application; never describe the degree as awarded.
 
 ### Professional Experience
-<!-- List your roles, most recent first -->
-- **[JOB_TITLE]** ([START_DATE] - [END_DATE]) - **[COMPANY]** ([LOCATION])
-  - [KEY_RESPONSIBILITY_1]
-  - [KEY_RESPONSIBILITY_2]
-  - [KEY_ACHIEVEMENT]
+- **Junior Software Developer** (February 2025 - Present) - **Nucleus Supply Chain** (Sandton, Johannesburg)
+  - Primary author of the proof-of-delivery, customer service desk, manifest, notification and configuration subsystems of the courier logistics platform (.NET 8, EF Core 8, SQL Server, Redis, Azure). The 76 entities / 246 API endpoints / 39 controllers are **platform-wide** figures, not a measure of his own authorship (confirmed 2026-08-18)
+  - Merged 40+ pull requests into a 37,000-line production codebase serving seven integrated courier partners (the seven partners qualify the platform, not integrations he personally authored)
+  - Rewrote manifest data access from an O(orders) lookup pattern to a single SQL JOIN using EF Core projection and AsNoTracking()
+  - Traced 30-second request delays to a Redis client timeout misconfiguration; cut the synchronous timeout from 15s to 2s
+  - Contributed to eliminating an N+1 pattern on the order list - up to 1,200 per-page calls replaced with three batched queries
+  - Built the WMS inbound processes from the ground up, alongside the tech lead on the wider platform architecture
+  - Diagnoses and fixes production defects on live client systems while courier and warehouse operations are running; takes requirements from business analysts, though most reach him through the tech lead
+
+### Independent Projects
+- **Point-of-sale platform** for South African spaza shops and independent supermarkets - .NET backend, React frontend, Paystack and Ozow payment integration
+- **Delivery fleet platform** for single-operator courier businesses - Python and FastAPI, WhatsApp-native ordering flow, configurable cash-on-delivery thresholds
 
 ### Technical Skills
-- **Primary:** [YOUR_PRIMARY_SKILLS]
-- **Secondary:** [YOUR_SECONDARY_SKILLS]
-- **Domain:** [YOUR_DOMAIN_EXPERTISE]
-- **Software:** [YOUR_TOOLS_AND_SOFTWARE]
+- **Primary:** C#, .NET 8, ASP.NET Core, Entity Framework Core 8, LINQ, SQL, Microsoft SQL Server, REST APIs, Clean Architecture
+- **Secondary:** React, TypeScript, JavaScript, Redis (StackExchange.Redis), MongoDB
+- **Domain:** Courier and logistics systems (orders, waybills, manifests, proof of delivery, billing), warehouse management inbound processes, multi-partner integration, production performance debugging and query optimisation
+- **Software:** Microsoft Azure (Blob Storage, File Shares, SignalR), Application Insights, Azure DevOps, Visual Studio, Git, Paystack, Ozow
+- **Exposure (not production):** Python, FastAPI, Azure OpenAI, RAG pipelines
 
 ### Certifications
-<!-- List relevant certifications with dates -->
-- **[CERTIFICATION_NAME]** - [HOURS]h - completed [DATE]
+None recorded.
 
 ### Publications
-<!-- List peer-reviewed publications, if any -->
-- [AUTHOR_LIST] ([YEAR]). [TITLE]. [JOURNAL].
+None.
 
 ### Awards
-<!-- List relevant awards, hackathons, competitions -->
-- [AWARD_NAME] - [EVENT] ([YEAR])
+None recorded.
 
 ### Behavioral Profile
-<!-- Your behavioral assessment results (PI, DISC, Myers-Briggs, or self-assessment) -->
-- **[TRAIT_1]** - [DESCRIPTION]
-- **[TRAIT_2]** - [DESCRIPTION]
-- **Strengths:** [YOUR_STRENGTHS]
-- **Growth areas:** [YOUR_GROWTH_AREAS]
-- **Thrives in:** [YOUR_IDEAL_ENVIRONMENT]
+- **Subsystem ownership** - delivers most when handed a component to build end to end, from schema to endpoint
+- **Production debugging under pressure** - energised rather than rattled by live defects; the Redis and N+1 fixes are the evidence
+- **Performance instinct** - looks for the query pattern behind a slow page, not the surface symptom
+- **Strengths:** deep focus on owned work, live-system troubleshooting, data-access performance, honest scoping of shared work
+- **Growth areas:** breadth beyond one .NET codebase (mitigated by the Python/FastAPI side projects); degree outstanding; title (Junior) understates the scope carried
+- **Thrives in:** clear ownership of a component, an engaged tech lead who reviews code and gives architectural direction, real production systems with real users
 
 ### What Excites You
-<!-- What motivates you professionally -->
-- [PASSION_1]
-- [PASSION_2]
+- Owning a subsystem end to end and seeing operations staff use it daily
+- Finding and fixing the query pattern behind a slow production system
+- Building products for the South African market (spaza-shop POS, single-operator courier tooling)
+- Learning architecture deliberately from senior engineers rather than by accident
 
 ### Target Sectors
-<!-- Industries and companies you're targeting -->
-- [SECTOR_1]: [EXAMPLE_COMPANIES]
-- [SECTOR_2]: [EXAMPLE_COMPANIES]
+- **Logistics, courier and supply chain software:** direct domain experience - shortest ramp-up
+- **Fintech and payments:** adjacent via Paystack/Ozow integration work
+- **Product companies and SaaS on the .NET stack:** where subsystem ownership and performance work are valued
+- **Retail / e-commerce order and fulfilment systems:** same order-flow problem shape
 
 ### Deal-breakers
-<!-- Hard constraints on job search. Language requirements are handled separately and
-automatically from your Languages table above - don't duplicate them here. -->
-- [DEALBREAKER_1]
-- [DEALBREAKER_2]
+- **No .NET/C# in the stack** - a role requiring a full stack switch (Java, PHP, Ruby, Go) is deprioritised; the whole professional argument rests on .NET depth
+- **Roles requiring a language other than English** as a job condition (handled automatically by the Language Gate)
+- **Relocation outside the Johannesburg metro** unless the posting is fully remote or funds relocation
 
 ## Repo Structure
 - `cv/` - LaTeX CV variants (moderncv template, banking style)

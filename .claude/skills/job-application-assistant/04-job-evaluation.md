@@ -30,6 +30,25 @@ If the candidate's permit also constrains *hours* or *start date* (a student vis
 
 A role that fails this gate is not scored and not drafted. Everything below applies only to roles that pass it.
 
+## South African market gates — run with the two gates above
+
+Local additions to the eligibility check, for postings in South Africa.
+
+| Posting wording | Verdict |
+|-----------------|---------|
+| "SA citizens only", "must be a South African citizen or permanent resident" | **FAIL** if the candidate is neither — same hard stop as the Eligibility Gate above. |
+| "This is an Employment Equity (EE) position", "preference will be given to candidates from designated groups", "in line with our EE targets" | **PROCEED.** This is a preference statement under the Employment Equity Act, not an eligibility bar. Record it as posting context and surface it in the report so the candidate can judge their own standing — never auto-exclude, and never state or infer the candidate's race, gender or disability status in an application unless they have explicitly asked for it to be declared. |
+| "Only candidates with a valid critical skills work visa", "must have own work permit" | **FAIL** unless the profile records that permit. |
+| "Valid driver's licence and own vehicle required" | **PROCEED, but flag.** Common in SA sales, field and ops roles and often a genuine hard requirement — check the profile before drafting. |
+| "Clear criminal record and credit check required" | **PROCEED, but flag.** Standard for finance, retail-cash and security roles; the candidate decides. |
+| Requires a **security clearance** (SSA / defence / SARS-adjacent) | Treat as the Eligibility Gate's clearance row: verify the scheme, assume citizenship-gated. |
+
+**Qualification recognition:** a posting demanding a SAQA-evaluated foreign qualification, a
+specific professional registration (SAICA, SAIPA, ECSA, HPCSA, SACE, PMSA), or an NQF level
+the candidate does not hold is a **skills gap to report honestly**, not an automatic fail —
+unless the posting states registration as a condition of appointment, in which case it is a
+FAIL until the candidate holds or is registering for it.
+
 ## Language Gate — run before scoring
 
 No dimension or gate anywhere in this framework currently checks a posting's language requirements against what the candidate actually speaks - it is not one of the five Scoring Dimensions below, not a field `/scrape` or `/rank` track, and not something `/apply`'s language detection (Step 1, which already extracts a posting's required language generically) has anywhere to report to. This gate adds that check, structured the same way as the Eligibility Gate above: read the posting, classify against profile data, and treat a hard mismatch as FAIL before scoring.
@@ -60,9 +79,9 @@ How well do the required/preferred skills align with the candidate's capabilitie
 | 40-59 | Partial match, significant upskilling needed |
 | 0-39 | Fundamental mismatch |
 
-**Strong match areas:** [YOUR_PRIMARY_SKILLS]
-**Moderate match areas:** [YOUR_SECONDARY_SKILLS]
-**Weak match areas:** [SKILLS_YOU_LACK]
+**Strong match areas:** C#, .NET 8 / ASP.NET Core, Entity Framework Core, LINQ, Microsoft SQL Server (including query optimisation and execution-plan debugging), REST API design, Clean Architecture, Azure (Blob, File Shares, SignalR, Application Insights), Redis, Azure DevOps, Git
+**Moderate match areas:** React, TypeScript/JavaScript, MongoDB, payment integrations (Paystack, Ozow), Python/FastAPI (independent projects only), Azure OpenAI and RAG pipelines (exposure, not production)
+**Weak match areas:** Java, PHP, Ruby, Go, .NET Framework legacy (pre-Core), Kubernetes/containers, AWS and GCP, mobile (iOS/Android), formal data engineering (Spark, Databricks), team leadership and line management
 
 ### 2. Experience Match (0-100)
 Does work history align with what they're looking for? Match on the function and nature of the work performed, not the literal job title - a "Data Consultant" and a "Data Scientist" role can be functionally identical.
@@ -74,9 +93,9 @@ Does work history align with what they're looking for? Match on the function and
 | 40-59 | Adjacent experience, would need to make the case |
 | 0-39 | Unrelated experience |
 
-**Strong:** [YOUR_DIRECT_EXPERIENCE_DOMAINS]
-**Moderate:** [YOUR_ADJACENT_EXPERIENCE]
-**Entry-level:** [ROLES_WITH_LIMITED_EXPERIENCE]
+**Strong:** Courier and logistics platforms (orders, waybills, manifests, proof of delivery, billing), warehouse management inbound processes, multi-partner system integration, production performance debugging on live systems
+**Moderate:** Supply chain and fleet operations software generally, e-commerce and retail order flows, payments-adjacent backend work, internal line-of-business systems in any sector built on .NET + SQL Server
+**Entry-level:** AI/ML engineering, data engineering, DevOps/platform engineering, anything requiring formal team leadership. 18 months of professional experience overall - roles asking for 5+ years are a stretch regardless of domain match.
 
 ### 3. Behavioral/Culture Fit (0-100)
 Does the role and company culture match the behavioral profile?
@@ -107,19 +126,20 @@ Does this role advance career goals and contain tasks that energize?
 | 0-39 | Dead end or backwards step |
 
 **Career goals:**
-- [YOUR_CAREER_GOAL_1]
-- [YOUR_CAREER_GOAL_2]
-- [YOUR_CAREER_GOAL_3]
+- Move from Junior to mid-level Software Developer / Backend Developer on the .NET stack, with the title matching the subsystem-ownership scope already being carried
+- Keep depth in backend engineering: data access, query performance, API design, and systems that carry real production load
+- Work under an engaged senior/tech lead with genuine code review, so architecture skill grows deliberately rather than by accident
+- Broaden beyond a single codebase and employer without abandoning the .NET/SQL Server core
 
 **Motivation filter:** Evaluate not just whether you *can* do the tasks, but whether the tasks will *energize* you. Consider:
-- Tasks that energize: [YOUR_ENERGIZING_TASKS]
-- Tasks that drain: [YOUR_DRAINING_TASKS]
+- Tasks that energize: owning a subsystem end to end; diagnosing production defects on live systems; finding and fixing the query pattern behind a slow page; building something operations staff actually use daily
+- Tasks that drain: ticket-queue-only maintenance with no build work; constant context-switching across many unrelated client codebases; meeting-heavy roles that pull away from hands-on engineering
 - Non-task factors: leadership style, department culture, company values, degree of autonomy
 
 **Life situation alignment:** Consider personal constraints:
-- **Security**: [YOUR_FINANCIAL_SITUATION_CONTEXT]
-- **Flexibility**: [YOUR_SCHEDULE_CONSTRAINTS]
-- **Professional development**: [YOUR_GROWTH_PRIORITIES]
+- **Security**: currently employed with a 30-day notice period, so there is no forced urgency - a move must be a genuine step up in scope, stack quality or compensation, not a lateral jump
+- **Flexibility**: Johannesburg metro commute (Sandton base) or remote. Cape Town/Durban roles are relocation decisions, not commutes. Hybrid is fine; fully on-site with no flexibility is a negative but not a hard stop
+- **Professional development**: mentorship and code review from senior engineers; exposure to architecture decisions; finishing the outstanding 16 credits of the BSc is a live goal, so study-friendly employers score higher
 
 ### 6. Salary Benchmark (Optional)
 

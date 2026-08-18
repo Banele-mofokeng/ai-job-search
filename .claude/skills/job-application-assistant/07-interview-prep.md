@@ -12,46 +12,97 @@ Structure answers as: **Situation** (context), **Task** (your responsibility), *
 
 Keep answers to 1-2 minutes. Be specific. End with what you learned or would do differently.
 
-## Ready-Made STAR Examples
+## STAR Candidates (Complete Manually)
 
-<!-- These are populated by /setup from your actual experience. Below are templates showing the format. -->
+<!-- Seeded by /setup (Path A) from documents/cv/Banele_Mofokeng_CV.docx, 2026-08-18.
+Each stub below is a real, verifiable achievement. Fill in the S/T/A/R detail from memory -
+only you know the surrounding context, and an interviewer will ask for it. -->
 
-### 1. [PROJECT_NAME] ([SKILL_DEMONSTRATED])
-**S:** [CONTEXT - what was happening, what was the problem]
-**T:** [YOUR RESPONSIBILITY - what you specifically needed to do]
-**A:** [WHAT YOU DID - specific actions, tools, methods]
-**R:** [OUTCOME - measurable results, adoption, impact]
-**Use for:** "[QUESTION_TYPE_1]", "[QUESTION_TYPE_2]"
+### Redis timeout misconfiguration causing 30-second request delays
+**Source:** CV - Nucleus Supply Chain
+**What happened:** Traced 30-second request delays to a Redis client timeout misconfiguration and corrected it, cutting the synchronous timeout from 15 seconds to 2 and removing the worst-case stall when the cache was slow or unavailable.
+**Why it matters:** Debugging under pressure, production troubleshooting, "tell me about a difficult bug", "a time you improved performance".
+**S/T/A/R stub:**
+- Situation: (who reported it, what were users/operations seeing, how long had it been happening)
+- Task: (were you assigned it or did you pick it up)
+- Action: (how did you isolate Redis as the cause - Application Insights? logs? timing?)
+- Result: (measured before/after, who confirmed it, did it recur)
 
-### 2. [PROJECT_NAME] ([SKILL_DEMONSTRATED])
-**S:** [CONTEXT]
-**T:** [YOUR RESPONSIBILITY]
-**A:** [WHAT YOU DID]
-**R:** [OUTCOME]
-**Use for:** "[QUESTION_TYPE_1]", "[QUESTION_TYPE_2]"
+### Manifest view rewritten from O(orders) lookups to a single JOIN
+**Source:** CV - Nucleus Supply Chain
+**What happened:** Replaced per-manifest and per-order lookups with one SQL JOIN using EF Core projection and AsNoTracking().
+**Why it matters:** Query optimisation, ownership of a subsystem, "a time you improved something nobody asked you to".
+**S/T/A/R stub:**
+- Situation: (how slow was the manifest view, at what data volume)
+- Task:
+- Action: (how did you find the pattern, how did you verify the rewrite was equivalent)
+- Result: (page load before/after, any regression risk you handled)
 
-### 3. [PROJECT_NAME] ([SKILL_DEMONSTRATED])
-**S:** [CONTEXT]
-**T:** [YOUR RESPONSIBILITY]
-**A:** [WHAT YOU DID]
-**R:** [OUTCOME]
-**Use for:** "[QUESTION_TYPE_1]", "[QUESTION_TYPE_2]"
+### N+1 elimination on the order list (1,200 calls per page to three queries)
+**Source:** CV - Nucleus Supply Chain
+**What happened:** Contributed to replacing up to 1,200 per-page database calls with three batched queries.
+**Why it matters:** Collaboration ("contributed to" - scope it honestly), performance work, "a time you worked with others on a hard problem".
+**S/T/A/R stub:**
+- Situation:
+- Task: (be precise about which part was yours vs. the team's)
+- Action:
+- Result:
 
-<!-- Add more STAR examples as needed. Aim for 4-6 covering different competencies. -->
+### Primary authorship of five subsystems
+**Source:** CV - Nucleus Supply Chain
+**What happened:** Primary author of the proof-of-delivery, customer service desk, manifest, notification and configuration subsystems (76 entities, 246 endpoints, 39 controllers).
+**Why it matters:** Ownership and scope - the strongest answer to "what have you actually built?" and to a Junior title being questioned.
+**S/T/A/R stub:**
+- Situation: (what existed before, why were these needed)
+- Task:
+- Action: (design decisions you made, what you would do differently now)
+- Result: (who uses them, what volume, how long have they run)
+
+### WMS inbound processes built from the ground up
+**Source:** CV - Nucleus Supply Chain
+**What happened:** Built the inbound processes of a separate warehouse management system, alongside the tech lead on the wider platform architecture.
+**Why it matters:** Greenfield capability plus honest scoping of shared work - "a time you built something new", "how do you work with senior engineers".
+**S/T/A/R stub:**
+- Situation:
+- Task: (state clearly which parts were yours and which were the tech lead's)
+- Action:
+- Result:
+
+### Independent products: spaza-shop POS and single-operator courier platform
+**Source:** CV - Selected Projects
+**What happened:** Building a .NET/React POS with Paystack and Ozow integration, and a Python/FastAPI delivery platform with a WhatsApp-native ordering flow.
+**Why it matters:** Initiative, product thinking, SA market understanding, and the answer to "what do you do outside work?"
+**S/T/A/R stub:**
+- Situation: (what problem in the market made you start these)
+- Task:
+- Action: (why Paystack and Ozow, why WhatsApp ordering)
+- Result: (users? revenue? still in build? say so plainly)
 
 ## Common Tough Questions
 
-### "Why did you leave [previous company]?"
-> [PREPARE YOUR ANSWER - be honest, forward-looking, no negativity about former employer]
+### "Why are you leaving Nucleus Supply Chain?"
+> Prepare this before the first interview. Forward-looking framing that is true: you are carrying
+> subsystem-owner scope on a Junior title and want a mid-level role with senior engineers to learn
+> architecture from. No criticism of the employer, no salary complaint as the headline reason.
 
-### "You don't have [specific skill/experience]."
-> [PREPARE YOUR ANSWER - acknowledge the gap, bridge to adjacent experience, show willingness to learn]
+### "You have not finished your degree."
+> The honest answer, prepared: 16 credits outstanding on the BSc at North-West University,
+> coursework otherwise complete, and 18 months of production delivery since. State the plan for
+> finishing it if you have one. Never imply it is done.
+
+### "You only have 18 months of experience / you have only worked in one codebase."
+> Bridge to depth: five subsystems as primary author, 76 entities, 246 endpoints, seven courier
+> partner integrations, plus production performance fixes. Add the independent projects as evidence
+> of working outside that stack (Python/FastAPI, payment integrations).
 
 ### "Where do you see yourself in 5 years?"
-> [PREPARE YOUR ANSWER - show ambition aligned with the role's growth path]
+> Aligned with the stated career goal: senior backend engineer with architecture responsibility,
+> having finished the degree, still hands-on. Tie it to the specific team's growth path.
 
 ### "What's your biggest weakness?"
-> [PREPARE YOUR ANSWER - genuine weakness with concrete mitigation strategy]
+> Pick a real one with a concrete mitigation. Candidate material: breadth across stacks and
+> platforms is narrower than the depth in .NET/SQL Server - mitigated by the Python/FastAPI side
+> projects and by wanting a team with code review. Do not use a fake weakness.
 
 ### "Why this company specifically?"
 > Customize per company. Must reference: specific projects, company values, market position, or team structure. Never give a generic answer.

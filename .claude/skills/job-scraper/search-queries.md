@@ -12,14 +12,21 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 
 ## Search Sites
 
-Primary (your market's job boards - scaffold one with `/add-portal`):
-- **[YOUR_JOB_BOARD]** - your market's largest general job board
-- **linkedin.com/jobs** - LinkedIn job listings (filter: [YOUR_COUNTRY] / [YOUR_CITY]); also covered by `linkedin-search` CLI
-- **[YOUR_INDUSTRY_JOB_BOARD]** - a niche/industry board for your field (optional)
-- **[YOUR_ADDITIONAL_JOB_BOARD]** - another major board for your market (optional)
+**Market: South Africa.** Two SA portal CLIs are installed and run first; the `site:`
+templates below are the WebSearch fallback for boards without a CLI.
 
-Secondary (company career pages via Google):
-- Direct Google searches with `site:` filters for known target companies
+Primary (CLI-backed, run automatically by `/scrape`):
+- **careerjunction.co.za** - `careerjunction-search` CLI. Richest structured data (company, salary line, employment type, expiry). Location is a `/jobs/<city>` path.
+- **careers24.com** - `careers24-search` CLI. Broadest sector mix (mining, retail, finance, trades). Employer name only on the detail page.
+- **linkedin.com/jobs** - `linkedin-search` CLI, country-agnostic. Pass `-l "Johannesburg, Gauteng, South Africa"` (or your metro).
+- **freehire.me** - `freehire-search` CLI, tech/data roles only, many markets.
+
+Secondary (WebSearch fallback - no CLI):
+- **za.indeed.com** - large aggregator; heavy bot protection, so `site:` search only
+- **pnet.co.za** - major SA board, but its `robots.txt` disallows `/jobs/*?*`, so **no scraper**; browse manually or via `site:` search
+- **offerzen.com** - SA developer marketplace; roles sit behind a candidate login, so sign up directly rather than scraping
+- **jobmail.co.za**, **careers.govpage.co.za** (public sector), **sayouth.mobi** (youth / entry level)
+- Company career pages via Google `site:` searches
 
 ## Query Categories
 
@@ -27,58 +34,114 @@ Queries are grouped by priority. Write **each category in every language from yo
 
 **Organize by function, not job title.** The same underlying work carries different titles across companies and markets (a "Data Scientist" role at one employer may be posted as "Insights Analyst" or "Data Consultant" at another). Name each priority category after the function it covers, and list several plausible job titles as query variants within that category rather than betting an entire priority tier on one exact title string.
 
-### Priority 1: [YOUR_PRIMARY_ROLE_TYPE]
+### Priority 1: Backend .NET engineering (mid-level)
 
-These match your strongest and most desired career direction.
-
-```
-site:[YOUR_JOB_BOARD] "[YOUR_PRIMARY_JOB_TITLE_1]" [YOUR_CITY]
-site:[YOUR_JOB_BOARD] "[YOUR_PRIMARY_JOB_TITLE_2]" [YOUR_CITY]
-site:[YOUR_JOB_BOARD] "[YOUR_KEY_SKILL]" [YOUR_CITY]
-site:linkedin.com/jobs "[YOUR_PRIMARY_JOB_TITLE_1]" [YOUR_COUNTRY]
-```
-
-### Priority 2: [YOUR_DOMAIN_EXPERTISE]
-
-These match your domain expertise.
+The core target: building and owning backend services on the .NET stack. Titles vary wildly
+across SA employers for the same work, so search several.
 
 ```
-site:[YOUR_JOB_BOARD] [YOUR_DOMAIN_KEYWORD_1] [YOUR_CITY] OR [YOUR_REGION]
-site:[YOUR_JOB_BOARD] [YOUR_DOMAIN_KEYWORD_2] [YOUR_COUNTRY]
-site:linkedin.com/jobs [YOUR_DOMAIN_KEYWORD_1] [YOUR_CITY] [YOUR_COUNTRY]
+site:careerjunction.co.za "Software Developer" ".NET" Johannesburg
+site:careers24.com "Backend Developer" C# Gauteng
+site:za.indeed.com "C# Developer" Sandton OR Johannesburg
+site:careerjunction.co.za "Intermediate Developer" ".NET Core" Johannesburg
+site:linkedin.com/jobs ".NET Developer" South Africa
+site:linkedin.com/jobs "Backend Engineer" C# Johannesburg
 ```
 
-### Priority 3: [YOUR_ADJACENT_ROLE_TYPE]
+CLI equivalents (preferred - these run first):
+```
+careerjunction-search: -q "software developer .NET" -l "Johannesburg"
+careerjunction-search: -q "C# developer" -l "Sandton"
+careers24-search:      -q "backend developer" -l "Gauteng"
+careers24-search:      -q "C# .NET developer" -l "Gauteng"
+linkedin-search:       -q ".NET developer" -l "Johannesburg, Gauteng, South Africa"
+linkedin-search:       -q "backend engineer C#" -l "South Africa" --remote remote
+```
 
-Adjacent roles you could pivot into.
+### Priority 2: Logistics, supply chain and fintech domain
+
+Same engineering work, in the domains where the existing courier/WMS and payments experience
+shortens the ramp-up and strengthens the cover letter.
 
 ```
-site:[YOUR_JOB_BOARD] "[YOUR_ADJACENT_TITLE_1]" [YOUR_KEY_SKILL] [YOUR_CITY]
-site:[YOUR_JOB_BOARD] "[YOUR_ADJACENT_TITLE_2]" [YOUR_KEY_SKILL] [YOUR_CITY]
+site:careerjunction.co.za developer logistics OR courier OR "supply chain" Johannesburg OR Gauteng
+site:careers24.com developer "warehouse management" OR WMS South Africa
+site:careerjunction.co.za "software developer" fintech OR payments Johannesburg
+site:linkedin.com/jobs software developer logistics Johannesburg South Africa
 ```
 
-### Priority 4: Broader Technical / Consulting
+CLI equivalents:
+```
+careerjunction-search: -q "developer logistics" -l "Johannesburg"
+careerjunction-search: -q "developer payments" -l "Sandton"
+careers24-search:      -q "software developer supply chain" -l "Gauteng"
+```
 
-Wider net for general technical roles.
+### Priority 3: Full-stack and adjacent engineering
+
+Roles where the React/TypeScript half is in scope, or where the title differs but the work is
+the same backend engineering.
 
 ```
-site:[YOUR_JOB_BOARD] [YOUR_KEY_SKILL] developer [YOUR_CITY]
-site:linkedin.com/jobs "[YOUR_KEY_SKILL] developer" [YOUR_CITY]
-site:[YOUR_JOB_BOARD] "technical consultant" [YOUR_DOMAIN] [YOUR_CITY]
+site:za.indeed.com "Full Stack Developer" ".NET" React Johannesburg
+site:careerjunction.co.za "Software Engineer" C# SQL Johannesburg
+site:careers24.com "Application Developer" ".NET" Gauteng
+site:linkedin.com/jobs "full stack developer" ".NET" "React" South Africa
 ```
+
+CLI equivalents:
+```
+careerjunction-search: -q "full stack developer .NET React" -l "Johannesburg"
+careers24-search:      -q "software engineer C#" -l "Gauteng"
+```
+
+### Priority 4: Remote and wider net
+
+Fully remote SA roles, plus a broad sweep for anything .NET/SQL-shaped that the tighter
+queries miss.
+
+```
+site:careers24.com C# developer remote South Africa
+site:linkedin.com/jobs ".NET" developer remote South Africa
+site:za.indeed.com "SQL Server" developer Johannesburg
+site:careerjunction.co.za "Entity Framework" OR "ASP.NET Core" South Africa
+```
+
+CLI equivalents:
+```
+linkedin-search:       -q ".NET developer" -l "South Africa" --remote remote --jobage 7
+freehire-search:       (tech aggregator - query "C# .NET backend", remote)
+careerjunction-search: -q "ASP.NET Core"
+```
+
+**Deal-breaker filter:** a posting whose stack has no .NET/C# (pure Java, PHP, Ruby, Go,
+Node-only) is deprioritised, per CLAUDE.md's Deal-breakers - report it, do not silently drop it.
 
 ## Location Filter
 
-When evaluating results, verify the job location is within reasonable commute distance from your home. Define acceptable areas:
-- [YOUR_CITY] and surrounding areas
-- [ACCEPTABLE_AREA_1]
-- [ACCEPTABLE_AREA_2]
-- [BORDERLINE_AREA] (borderline - ~X min by transit)
-- [TOO_FAR_AREA] (too far)
+Verify each result is within reach of your base. South African commuting is metro-bound,
+so treat a different metro as a relocation, not a commute.
+
+- **Sandton, Johannesburg** and its suburbs (Rosebank, Bryanston, Midrand, Fourways, Randburg) - primary
+- Rest of **Gauteng** - acceptable where the commute is realistic (Pretoria/Centurion is the outer edge)
+- **Remote / work-from-home** - acceptable; SA postings label this "Remote", "Hybrid" or "WFH"
+- Other metros (Johannesburg / Cape Town / Durban / Pretoria / Gqeberha, whichever is not yours) - **relocation**, flag rather than silently include
+- Rest of Africa / abroad - only if the posting states relocation support or full remote
+
+Note that SA boards mix province and city in the same location field ("Gauteng",
+"Sandton", "Cape Town CBD"), so match on both levels rather than an exact city string.
 
 ## Language Filter
 
 Your working languages and levels are in CLAUDE.md's Languages table. When filtering scraped results, apply `04-job-evaluation.md`'s Language Gate: a posting requiring a language you haven't declared at all is excluded; a posting requiring a higher level than you declared in a language you do work in is not excluded, flag it clearly instead (see `job-scraper/SKILL.md`'s Step 3 "Quick Fit Assessment" for how the flag surfaces in `/scrape` output). Postings simply *written* in a language you don't work in, that don't require it on the job, are fine.
+
+## South Africa specifics
+
+- **Salary is usually undisclosed** ("Market Related", "Undisclosed"). Do not treat a missing salary as a red flag; benchmark from `salary_data.json` instead.
+- **Recruiting agencies dominate** both SA boards. The named "company" is often the agency (Network Contracting Solutions, Sinakho Staffshop, Hire Resolve, MSP Staffing), not the employer - check the description before writing anything company-specific into a cover letter.
+- **Employment Equity**: many postings state EE/AA preference or designated-group requirements. Record it as posting context; it is the candidate's call, never an automatic exclusion.
+- **Expiry dates matter**: SA adverts carry "Expires in N days" / "Apply before <date>" and vanish afterwards. Scrape and apply promptly, and re-check a posting before drafting.
+- **Duplicate adverts** are common - the same role is often posted by several agencies with different reference numbers. Dedupe on title + location + description similarity, not on the portal ID alone.
 
 ## Date Filter
 

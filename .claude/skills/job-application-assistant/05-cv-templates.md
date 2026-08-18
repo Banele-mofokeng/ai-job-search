@@ -52,7 +52,7 @@ Expected output: `Output written on main_<company>_<role>.pdf (2 pages, ...)`. A
     linkcolor=blue,
     filecolor=magenta,
     urlcolor=blue,
-    pdftitle={[YOUR_NAME] - CV},
+    pdftitle={Banele Mofokeng - CV},
     % Keep pdfpagemode=UseNone: this block runs after moderncv's own
     % \AtEndPreamble (moderncv.cls sets pdfpagemode there), so a FullScreen
     % value here would win and open every CV in fullscreen presentation mode.
@@ -65,10 +65,10 @@ Expected output: `Output written on main_<company>_<role>.pdf (2 pages, ...)`. A
 \name{[FIRST_NAME]}{[LAST_NAME]}
 % If you have no address to list, DELETE this whole line. \address{}{}{} fails
 % with "There's no line here to end" on every moderncv version.
-\address{[YOUR_ADDRESS]}{}{}
-\phone[mobile]{[YOUR_PHONE]}
-\email{[YOUR_EMAIL]}
-\extrainfo{\href{[YOUR_LINKEDIN_URL]}{LinkedIn}, \href{[YOUR_GITHUB_URL]}{GitHub}}
+\address{Sandton, Johannesburg, South Africa}{}{}
+\phone[mobile]{081 313 0871}
+\email{mofokengbanele9@gmail.com}
+\extrainfo{\href{https://linkedin.com/in/banele-mofokeng}{LinkedIn}, \href{https://github.com/Banele-mofokeng}{GitHub}}
 
 \begin{document}
 \makecvtitle
@@ -129,12 +129,39 @@ When the role sits outside your home domain, **lead with the domain-transfer arg
 
 **Create 2-3 profile statement templates for your main role types:**
 
-<!-- SETUP: These are populated based on your background -->
-**For [YOUR_PRIMARY_ROLE_TYPE] roles:**
-> [YOUR_PROFILE_STATEMENT_TEMPLATE_1]
+<!-- Populated by /setup, 2026-08-18. Every claim below is grounded in 01-candidate-profile.md.
+Tailor the wording per posting; never inflate the numbers or the scope. -->
 
-**For [YOUR_SECONDARY_ROLE_TYPE] roles:**
-> [YOUR_PROFILE_STATEMENT_TEMPLATE_2]
+**For backend / .NET Software Developer roles (primary):**
+> Software developer with 18 months of production experience on a .NET 8 courier logistics
+> platform, and primary author of five of its subsystems - proof of delivery, customer service
+> desk, manifests, notifications and configuration - across 76 entities and 246 API endpoints.
+> Works day to day in C#, Entity Framework Core and SQL Server on Azure, with a particular
+> focus on data-access performance: replaced an O(orders) manifest query pattern with a single
+> JOIN, cut a 1,200-call-per-page N+1 pattern to three batched queries, and traced a 30-second
+> request stall to a Redis timeout misconfiguration on a live system. Looking for a mid-level
+> backend role with the same depth of ownership and a senior team to learn architecture from.
+
+**For full-stack (.NET + React) roles (secondary):**
+> Full-stack developer working across a .NET 8 / SQL Server backend and a React and TypeScript
+> frontend on a production courier logistics platform serving seven integrated courier partners.
+> Primary author of five backend subsystems and builder of the inbound processes of a separate
+> warehouse management system, alongside independent projects that pair a .NET backend and React
+> frontend with South African payment integrations (Paystack, Ozow). Strongest on the backend and
+> on query performance, comfortable owning the UI that sits on top of it.
+
+**For logistics / supply-chain domain roles (tertiary):**
+> Developer with direct production experience in courier and warehouse systems: orders, waybills,
+> manifests, proof of delivery and billing across seven integrated courier partners, plus the
+> inbound processes of a warehouse management system built from the ground up. Diagnoses and
+> fixes defects on live client systems while courier and warehouse operations are still running -
+> the domain and the failure modes are already familiar, so the ramp-up is short.
+
+**Grounding rules for these statements:**
+- "18 months" is from February 2025 - update it as time passes rather than rounding up.
+- The BSc is **in progress with 16 credits outstanding**. If a statement mentions education at all, it says that.
+- The WMS and wider platform architecture work was done **alongside the tech lead**; never claim sole ownership of the platform architecture.
+- Title is Junior Software Developer. Let the scope numbers argue for mid-level; do not restate the title as anything else.
 
 Statements labeled *[Used for: <company>_<role>]* were extracted from archived application drafts by `/setup` Path A. They are **phrasing references, never fact sources**: when drafting from one, every factual claim still comes from `01-candidate-profile.md` - a past tailored draft does not vouch for its own accuracy.
 
