@@ -66,6 +66,25 @@ These reward **a specific situation over an adjective**. Most applicants submit 
 
 Prefer the version that **maps the candidate's problem onto the employer's problem**, where a truthful mapping exists. That is what "stand out" is actually asking for.
 
+## South African portal fields
+
+SA application portals (Careers24, CareerJunction, Pnet, Workday and SAP SuccessFactors
+instances used by SA banks, retailers and mines) ask for structured personal fields that
+most other markets do not. Rules for handling them:
+
+| Field | How to handle |
+|-------|---------------|
+| **SA ID number** | The candidate types it themselves. Never store it in this repo, never write it into a draft file, and never guess or reconstruct it. If a draft form file needs a placeholder, write `[ID NUMBER - fill in on the portal]`. |
+| **Race / gender / disability (EE declaration)** | The candidate's own call, every time. Do not pre-fill, do not infer from a name, and do not advise on what to select. If asked, say plainly that the field feeds Employment Equity reporting and the answer is theirs. |
+| **Nationality / work authorisation** | Answer only from what the profile records (citizen, permanent resident, named visa class). If the profile does not say, ask — do not assume. |
+| **Notice period** | SA contracts commonly run one calendar month, sometimes a week for short service. Use what the profile records; if unrecorded, ask rather than defaulting. |
+| **Driver's licence code** | SA codes are `B` (light vehicle), `EB`, `C1`, `C`, `EC`. State the code the profile records, or say the candidate holds no licence — never upgrade a code. |
+| **Matric / NQF level** | Matric is NQF 4. State qualifications at the NQF level actually awarded; an in-progress qualification is described as in progress. |
+| **Professional registration** | SAICA, SAIPA, ECSA, HPCSA, SACE, PMSA and similar: state the actual status (registered, candidate, eligible-not-registered, none). "Eligible" is not "registered". |
+| **Expected salary** | SA portals often force a figure. Use `salary_data.json` if present; otherwise give a range with the basis stated, and flag to the candidate that this figure anchors the negotiation. State whether it is cost-to-company (CTC) or basic — SA offers are usually quoted as CTC and the two are not comparable. |
+| **Criminal record / credit check consent** | Flag that the posting asks; the candidate answers. |
+| **References** | SA employers frequently contact references before the offer. Never invent a referee, and never list one the profile does not record as agreeing. |
+
 ## Output format
 
 Save to a plain `.txt` file the candidate can copy from, alongside their other application material for that employer. One file per employer, containing every field that employer asked for.
