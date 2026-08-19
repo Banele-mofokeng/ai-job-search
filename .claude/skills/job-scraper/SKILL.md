@@ -188,6 +188,18 @@ Scraper-based portal CLIs rot silently: when a portal changes its markup, the pa
 **Free pass (no extra requests).** For each enabled portal that ran in Step 1b:
 
 - **Degraded scan:** inspect the results it returned this run. Flags: `company` null or empty on every result, empty titles, undecoded entities (`&amp;`) or HTML fragments in titles, URLs that do not point at the portal. Any of these means the parser is half-working and `/scrape` is silently collecting junk.
+
+  **Documented-absence exception.** A field is only evidence of rot when the portal is
+  supposed to carry it. Some boards genuinely do not publish a field on their results
+  page, and their `SKILL.md` says so in its Notes section. Before flagging a portal on an
+  always-null field, check that skill's Notes: if the absence is documented there as a
+  property of the source, it is **not** degraded — say nothing. Only an *undocumented*
+  always-null field is a rot signal. Known instance: `jobplacements-search` never returns
+  `company` from `search` (the board's results page does not print the recruiter; `detail`
+  supplies it), so a null `company` on every Job Placements result is expected and must
+  not raise a health line. The same holds for any future portal whose SKILL.md documents
+  the same gap. If a portal's Notes and its output disagree in the other direction — the
+  Notes promise a field that is always null — that *is* degraded, and worth reporting.
 - **Yield history:** if the portal returned zero results across all of this run's queries, check whether `seen_jobs.json` holds prior entries from it (via the `portal` field, or by matching URL domains for entries predating the field). A portal that produced jobs on earlier runs and produces nothing now is suspect - the same queries worked before.
 
 **Escalation (bounded, on suspicion only).** A suspect portal gets **one** sentinel probe: run its documented `search` with the example query from its own SKILL.md (that query provably worked when the skill was registered), the portal's limit flag capped at 3, `--format json`. If that returns nothing, retry **once** with a single common word. Only then is the verdict **broken**. A 429 or block page is **never** evidence of breakage - record the portal as **inconclusive (rate-limited)**, back off, and do not retry.

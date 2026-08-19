@@ -12,12 +12,14 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 
 ## Search Sites
 
-**Market: South Africa.** Two SA portal CLIs are installed and run first; the `site:`
+**Market: South Africa.** Four SA portal CLIs are installed and run first; the `site:`
 templates below are the WebSearch fallback for boards without a CLI.
 
 Primary (CLI-backed, run automatically by `/scrape`):
 - **careerjunction.co.za** - `careerjunction-search` CLI. Richest structured data (company, salary line, employment type, expiry). Location is a `/jobs/<city>` path.
 - **careers24.com** - `careers24-search` CLI. Broadest sector mix (mining, retail, finance, trades). Employer name only on the detail page.
+- **networkrecruitmentinternational.com** - `network-recruitment-search` CLI. Specialist agency (IT, Finance, Engineering), JSON-backed so search already carries sector, salary and the full brief. `-l` takes a **province** upstream, a town client-side; `-d` takes a specialisation (`Software Development`, `DevOps`, `ERP`).
+- **jobplacements.com** - `jobplacements-search` CLI. High-volume general board, ~2000 new adverts a week, mostly agency-fed. `company` is null in search output by design - `detail` fills it in.
 - **linkedin.com/jobs** - `linkedin-search` CLI, country-agnostic. Pass `-l "Johannesburg, Gauteng, South Africa"` (or your metro).
 - **freehire.me** - `freehire-search` CLI, tech/data roles only, many markets.
 
@@ -46,16 +48,22 @@ site:za.indeed.com "C# Developer" Sandton OR Johannesburg
 site:careerjunction.co.za "Intermediate Developer" ".NET Core" Johannesburg
 site:linkedin.com/jobs ".NET Developer" South Africa
 site:linkedin.com/jobs "Backend Engineer" C# Johannesburg
+site:jobplacements.com "Software Developer" C# Johannesburg
+site:networkrecruitmentinternational.com developer ".NET" Gauteng
 ```
 
 CLI equivalents (preferred - these run first):
 ```
-careerjunction-search: -q "software developer .NET" -l "Johannesburg"
-careerjunction-search: -q "C# developer" -l "Sandton"
-careers24-search:      -q "backend developer" -l "Gauteng"
-careers24-search:      -q "C# .NET developer" -l "Gauteng"
-linkedin-search:       -q ".NET developer" -l "Johannesburg, Gauteng, South Africa"
-linkedin-search:       -q "backend engineer C#" -l "South Africa" --remote remote
+careerjunction-search:       -q "software developer .NET" -l "Johannesburg"
+careerjunction-search:       -q "C# developer" -l "Sandton"
+careers24-search:            -q "backend developer" -l "Gauteng"
+careers24-search:            -q "C# .NET developer" -l "Gauteng"
+network-recruitment-search:  -q ".NET developer" -l "Gauteng"
+network-recruitment-search:  -d "Software Development" -l "Gauteng"
+jobplacements-search:        -q ".NET developer" -l "Johannesburg"
+jobplacements-search:        -q "C# SQL" -l "Johannesburg"
+linkedin-search:             -q ".NET developer" -l "Johannesburg, Gauteng, South Africa"
+linkedin-search:             -q "backend engineer C#" -l "South Africa" --remote remote
 ```
 
 ### Priority 2: Logistics, supply chain and fintech domain
@@ -68,13 +76,19 @@ site:careerjunction.co.za developer logistics OR courier OR "supply chain" Johan
 site:careers24.com developer "warehouse management" OR WMS South Africa
 site:careerjunction.co.za "software developer" fintech OR payments Johannesburg
 site:linkedin.com/jobs software developer logistics Johannesburg South Africa
+site:jobplacements.com developer logistics OR "supply chain" OR ERP Johannesburg
+site:networkrecruitmentinternational.com developer ERP OR payments Gauteng
 ```
 
 CLI equivalents:
 ```
-careerjunction-search: -q "developer logistics" -l "Johannesburg"
-careerjunction-search: -q "developer payments" -l "Sandton"
-careers24-search:      -q "software developer supply chain" -l "Gauteng"
+careerjunction-search:       -q "developer logistics" -l "Johannesburg"
+careerjunction-search:       -q "developer payments" -l "Sandton"
+careers24-search:            -q "software developer supply chain" -l "Gauteng"
+network-recruitment-search:  -d "ERP" -l "Gauteng"
+network-recruitment-search:  -q "logistics" -l "Gauteng"
+jobplacements-search:        -q "developer supply chain" -l "Johannesburg"
+jobplacements-search:        -q "Acumatica OR ERP developer" -l "Johannesburg"
 ```
 
 ### Priority 3: Full-stack and adjacent engineering
@@ -87,12 +101,16 @@ site:za.indeed.com "Full Stack Developer" ".NET" React Johannesburg
 site:careerjunction.co.za "Software Engineer" C# SQL Johannesburg
 site:careers24.com "Application Developer" ".NET" Gauteng
 site:linkedin.com/jobs "full stack developer" ".NET" "React" South Africa
+site:jobplacements.com "Full Stack Developer" ".NET" OR React Johannesburg
+site:networkrecruitmentinternational.com "full stack" developer Gauteng
 ```
 
 CLI equivalents:
 ```
-careerjunction-search: -q "full stack developer .NET React" -l "Johannesburg"
-careers24-search:      -q "software engineer C#" -l "Gauteng"
+careerjunction-search:       -q "full stack developer .NET React" -l "Johannesburg"
+careers24-search:            -q "software engineer C#" -l "Gauteng"
+network-recruitment-search:  -q "full stack developer" -l "Gauteng"
+jobplacements-search:        -q "full stack developer .NET" -l "Johannesburg"
 ```
 
 ### Priority 4: Remote and wider net
@@ -105,14 +123,32 @@ site:careers24.com C# developer remote South Africa
 site:linkedin.com/jobs ".NET" developer remote South Africa
 site:za.indeed.com "SQL Server" developer Johannesburg
 site:careerjunction.co.za "Entity Framework" OR "ASP.NET Core" South Africa
+site:jobplacements.com "SQL Server" OR "ASP.NET" developer South Africa
 ```
 
 CLI equivalents:
 ```
-linkedin-search:       -q ".NET developer" -l "South Africa" --remote remote --jobage 7
-freehire-search:       (tech aggregator - query "C# .NET backend", remote)
-careerjunction-search: -q "ASP.NET Core"
+linkedin-search:             -q ".NET developer" -l "South Africa" --remote remote --jobage 7
+freehire-search:             (tech aggregator - query "C# .NET backend", remote)
+careerjunction-search:       -q "ASP.NET Core"
+network-recruitment-search:  -q "SQL" --jobage 14
+jobplacements-search:        -q "SQL Server developer" --jobage 14
 ```
+
+**The two agency CLIs do not read a query the same way — this bites.**
+
+- `network-recruitment-search` matches `--query` as a **phrase, order-sensitive**.
+  `-q "developer logistics"` returns **0** while `-q developer` returns 174 and
+  `-q logistics` returns 59. Give it **one strong keyword** and narrow with `-d`/`-l`,
+  or a phrase that is genuinely a job title (`"software developer"`). Never conclude the
+  portal is dead from a multi-word query - re-run with a single word first.
+- `jobplacements-search` ANDs the terms and ignores order, so multi-word queries behave
+  the way you would expect.
+
+**Both need a wide net.** `network-recruitment-search` returns the entire match set on one
+call (paging is client-side), so a bare `-d "Software Development"` with no keyword is a
+cheap full sweep of that specialisation - and the most reliable way to use it.
+`jobplacements-search` pages ten at a time and needs `--page` walked for a common term.
 
 **Deal-breaker filter:** a posting whose stack has no .NET/C# (pure Java, PHP, Ruby, Go,
 Node-only) is deprioritised, per CLAUDE.md's Deal-breakers - report it, do not silently drop it.
@@ -138,7 +174,8 @@ Your working languages and levels are in CLAUDE.md's Languages table. When filte
 ## South Africa specifics
 
 - **Salary is usually undisclosed** ("Market Related", "Undisclosed"). Do not treat a missing salary as a red flag; benchmark from `salary_data.json` instead.
-- **Recruiting agencies dominate** both SA boards. The named "company" is often the agency (Network Contracting Solutions, Sinakho Staffshop, Hire Resolve, MSP Staffing), not the employer - check the description before writing anything company-specific into a cover letter.
+- **Recruiting agencies dominate** the SA boards. The named "company" is often the agency (Network Contracting Solutions, Sinakho Staffshop, Hire Resolve, MSP Staffing), not the employer - check the description before writing anything company-specific into a cover letter. Two installed CLIs are agency sources by definition: `network-recruitment-search` always reports `Network Recruitment (<branch>)` because the client is never named, and most `jobplacements-search` adverts are agency-posted. Treat the `company` field on both as "who is recruiting", not "where you would work", and never address a cover letter to the end client on the strength of it.
+- **The same role appears on several of these boards at once**, often via different agencies with different references. The cross-portal dedupe below matters more now that four SA CLIs run per scrape.
 - **Employment Equity**: many postings state EE/AA preference or designated-group requirements. Record it as posting context; it is the candidate's call, never an automatic exclusion.
 - **Expiry dates matter**: SA adverts carry "Expires in N days" / "Apply before <date>" and vanish afterwards. Scrape and apply promptly, and re-check a posting before drafting.
 - **Duplicate adverts** are common - the same role is often posted by several agencies with different reference numbers. Dedupe on title + location + description similarity, not on the portal ID alone.
