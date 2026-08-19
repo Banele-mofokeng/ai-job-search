@@ -46,6 +46,29 @@ per-file diff commands.
 
 ### Fixed
 
+- **`jobbank-search` search output now carries the `/scrape` contract's `date` field** (#342) -
+  the CLI emitted `posted` (full ISO 8601) but not the cross-portal `date` key, the one Step 2
+  contract field it was missing. Search results now additively emit `date` as `YYYY-MM-DD`
+  derived from `posted` (kept unchanged), `null` when the feed item carries no `pubDate`. The
+  result mapping is extracted into an exported `normalizeSearchItem` so the derivation is
+  pinned by tests. Completes the portal-contract series with #339 (jobnet) and #340
+  (jobdanmark).
+
+- **`jobdanmark-search` search output now carries the `/scrape` contract fields** - the CLI
+  exposed the API-native schema (`companyName`, `publishedDate` in `DD-MM-YYYY`, …) with no
+  `company`, `location`, `date` or `deadline`, so every `/scrape` run flagged jobdanmark as
+  degraded and the `seen_jobs.json` dedupe lost the company. Search results now additively emit
+  `company`, `location` (city after the postal code in `companyAddress`), and `date`/`deadline`
+  in the `YYYY-MM-DD` convention, with null-safe handling of a missing address.
+
+- **`jobnet-search` search output now carries the `/scrape` contract fields** - the CLI emitted
+  the raw Jobnet API schema (`jobAdId`, `hiringOrgName`, `publicationDate`, …) with no
+  `company`, `location`, `date` or `url`, so every `/scrape` run flagged jobnet as degraded
+  forever (CI stayed green), the `seen_jobs.json` dedupe fell back to company+title, and `/rank`
+  lost the posting link. Search results now additively emit `company`, `location`, `date`,
+  `deadline` and `url` (`https://jobnet.dk/find-job/{jobAdId}` - the `/job/` route is
+  login-walled); the API's `1900-01-01` "deadline not disclosed" sentinel maps to `null`.
+
 - **A `/` in a company or role name no longer nests the application archive one level too deep**
   (jakob1379/ai-job-search#22). `Novo Nordisk A/S` derived
   `documents/applications/novo_nordisk_a/s_data_scientist/` - written and found by every command
